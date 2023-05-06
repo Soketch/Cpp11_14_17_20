@@ -10,7 +10,7 @@
 ///****************************************************************************
 
 
-//Ê¹ÓÃÀà´´½¨Ïß³Ì¶ÔÏó
+//ä½¿ç”¨ç±»åˆ›å»ºçº¿ç¨‹å¯¹è±¡
 
 
 #include<iostream>
@@ -21,29 +21,35 @@ class Th
 public:
 	int& m_i;
 	Th(int &temp):m_i(temp){
-		std::cout << "Ta¹¹Ôìº¯Êý" << std::endl;
+		std::cout << "Taæž„é€ å‡½æ•°" << std::endl;
 	}
 	Th(const Th& ta) :m_i(ta.m_i) {
-		std::cout << "Ta¿½±´¹¹Ôìº¯Êý" << std::endl;
+		std::cout << "Taæ‹·è´æž„é€ å‡½æ•°" << std::endl;
 	}
 	void operator()() {
-		std::cout << "¿ªÊ¼Ö´ÐÐ×ÓÏß³Ì" << std::endl;
+		std::cout << "å¼€å§‹æ‰§è¡Œå­çº¿ç¨‹" << std::endl;
 		std::cout << "Th::m_i=" << this->m_i << std::endl;
-		std::cout << "Ö´ÐÐÍê±Ï×ÓÏß³Ì" << std::endl;
+		std::cout << "æ‰§è¡Œå®Œæ¯•å­çº¿ç¨‹" << std::endl;
 	}
 	~Th() {
-		std::cout << "TaÎö¹¹º¯Êý" << std::endl;
+		std::cout << "Taæžæž„å‡½æ•°" << std::endl;
 	}
 };
 
 
+
+
 int main()
 {
-	std::cout << "Ö÷Ïß³Ì¿ªÊ¼" << std::endl;
+	std::cout << "ä¸»çº¿ç¨‹å¼€å§‹" << std::endl;
 
+
+	//ä½¿ç”¨ç±»
+	/*
+	
 	int n = 10;
 	Th Ta(n);
-	std::thread myThread(Ta);   // ÕâÀïÊµ¼ÊÊ¹ÓÃµÄÊÇ¿½±´¹¹Ôìº¯Êý
+	std::thread myThread(Ta);   // è¿™é‡Œå®žé™…ä½¿ç”¨çš„æ˜¯æ‹·è´æž„é€ å‡½æ•°
 	
 	//myThread.join();
 
@@ -51,7 +57,22 @@ int main()
 
 	std::cout << "Ta.m_i=" << Ta.m_i << std::endl;
 
-	std::cout << "Ö÷Ïß³Ì½áÊø" << std::endl;
+	*/
+
+
+	// ä½¿ç”¨lambdaè¡¨è¾¾å¼
+	auto myLambda = []() {
+		std::cout << "å¼€å§‹æ‰§è¡Œå­çº¿ç¨‹" << std::endl;
+		std::cout << "æ‰§è¡Œå®Œæ¯•å­çº¿ç¨‹" << std::endl;
+	};
+
+	std::thread myThead(myLambda);
+	
+	//myThead.join();
+	myThead.detach();
+
+	std::cout << "ä¸»çº¿ç¨‹ç»“æŸ" << std::endl;
 	system("pause");
 	return 0;
 }
+
